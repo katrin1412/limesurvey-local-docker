@@ -1,0 +1,36 @@
+version: '3'
+services:
+  limesurvey:
+    image: docker.io/martialblog/limesurvey:6-apache
+    restart: always
+    environment:
+      - DB_TYPE=pgsql
+      - DB_PORT=5432
+      - DB_HOST=db
+      - DB_PASSWORD=user_study
+      - DB_NAME=limesurvey
+      - DB_USERNAME=limesurvey
+      - ADMIN_USER=admin
+      - ADMIN_NAME=Admin
+      - ADMIN_PASSWORD=user_study
+      - ADMIN_EMAIL=katrin.nehmeier@tha.de
+      - PUBLIC_URL=foobar.com
+    volumes:
+    - limesurvey:/var/www/html/upload/surveys
+    ports:
+    - 8080:8080
+    depends_on:
+    - db
+  db:
+    image: docker.io/postgres:10-alpine
+    restart: always
+    volumes:
+    - db-data:/var/lib/postgresql/data
+    environment:
+    - POSTGRES_USER=limesurvey
+    - POSTGRES_DB=limesurvey
+    - POSTGRES_PASSWORD=user_study
+volumes:
+  limesurvey:
+  db-data:
+
