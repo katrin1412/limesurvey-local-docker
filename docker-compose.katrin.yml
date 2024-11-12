@@ -16,7 +16,7 @@ services:
       - ADMIN_EMAIL=katrin.nehmeier@tha.de
       - PUBLIC_URL=foobar.com
     volumes:
-    - limesurvey:/var/www/html/upload/surveys
+    - ./limesurvey:/var/www/html/upload/surveys
     ports:
     - 8080:8080
     depends_on:
@@ -30,7 +30,7 @@ services:
     - POSTGRES_USER=limesurvey
     - POSTGRES_DB=limesurvey
     - POSTGRES_PASSWORD=user_study
+
 volumes:
-  limesurvey:
   db-data:
 
